@@ -76,10 +76,11 @@
           <label for="name">Name</label>
           <input id="name" type="text" class="form-control" />
         </div>
-        <div class="form-group col-md-2">
-          <label for="date-range">Range</label>
-          <select name="" class="form-control" id="date-range">
-            <option disabled selected value="">Date Range</option>
+		 <div class="form-group col-md-2">
+          <label for="range">Range</label>
+          <select name="" class="form-control" id="range">
+            <option selected value="months">months</option>
+            <option value="year">year</option>
           </select>
         </div>
 
@@ -100,7 +101,7 @@
         </div>
         <div class="form-group col-md-2">
           <label for="" style="height: 18px"></label>
-          <button class="btn btn-primary btn-block md-btn-inline">
+          <button id="submit" class="btn btn-primary btn-block md-btn-inline">
             Submit
           </button>
         </div>
@@ -227,7 +228,24 @@ $("input",rowele).each(function(i,e){
 console.log($(e).val())
  $(e).attr("readonly",true)
  })
+}
 
+$("#submit").click(function(e){
+e.preventDefault()
+var userData=formValidation()
+if(!userData)alert("please fill the data")
+console.log(userData)
+})
+///form- validation
+function formValidation(){
+var valid=true;
+var userInput={}
+$("form .form-control").each(function(i,e){
+var input=$(e)
+if(input.val()==""||input.val()==null)valid=false
+userInput[input.attr("id")]=input.val()
+})
+return valid?userInput:valid
 }
 bindingTableRow()
 bindingTableRow()
