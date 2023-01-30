@@ -65,39 +65,47 @@
       .form-control:disabled, .form-control[readonly] {
         background-color: transparent;
       }
+     #list-view tbody tr td:last-child{
+      border-bottom: none;
+      border-left: none;
+      border-right: none;
+     }
     </style>
     <title>Document</title>
   </head>
   <body>
     <div class="container-fluid">
-      <h2 class="p-3">List View Page</h2>
+      <h2 class="p-3">List view Page</h2>
       <form class="row m-2 p-4 border" action="">
         <div class="form-group col-md-2">
           <label for="name">Name</label>
           <input id="name" type="text" class="form-control" />
+        <div class="invalid-feedback">Please Enter Name</div>
         </div>
-		 <div class="form-group col-md-2">
-          <label for="range">Range</label>
-          <select name="" class="form-control" id="range">
-            <option selected value="months">months</option>
-            <option value="year">year</option>
+        <div class="form-group col-md-2">
+          <label for="status">Range</label>
+          <select name="" class="form-control" id="status">
+            <option selected value="date-range">Date Range</option>
           </select>
-        </div>
-
+        <div class="invalid-feedback">Please Select Range</div>
+          </div>
         <div class="form-group col-md-2">
           <label for="startdate">Startdate</label>
           <input type="date" class="form-control" id="startdate" />
-        </div>
+          <div class="invalid-feedback">Please Enter Date mm/dd/yyyy</div>
+         </div>
         <div class="form-group col-md-2">
           <label for="enddate">Enddate</label>
           <input type="date" class="form-control" id="enddate" />
-        </div>
+          <div class="invalid-feedback">Please Enter date mm/dd/yyyy</div>
+         </div>
         <div class="form-group col-md-2">
           <label for="status">status</label>
           <select name="" class="form-control" id="status">
             <option selected value="Assigned">Assigned</option>
             <option value="In Progress">In Progress</option>
           </select>
+          <div class="invalid-feedback">Please Select Status</div>
         </div>
         <div class="form-group col-md-2">
           <label for="" style="height: 18px"></label>
@@ -105,55 +113,72 @@
             Submit
           </button>
         </div>
+      <div class="alert alert-success" id="success-alert">
+          <strong class="my-4 mx-3">Success!</strong>
+          <button type="button" class="p-1 close" data-dismiss="alert">x</button>
+        </div>
       </form>
 
       <div class="m-2">
         <table
-          id="table-list"
-          class="table table-sm md-table-lg table-bordered"
-        >
-          <thead>
-            <tr>
-              <th>Task link</th>
-              <th>Created</th>
-              <th>Assets Type</th>
-              <th>Task Lead</th>
-              <th>Task Status</th>
-              <th>Submitted by</th>
-              <th class="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id="tasklist-item">
-              <td name="task-link"><input class="form-control input border-0 p-0 " readonly type="text"></td>
-              <td name="created"><input class="form-control input border-0 p-0" readonly type="text"></td>
-              <td name="assets-type"><input class="form-control input border-0 p-0" readonly type="text"></td>
-              <td name="task-lead"><input class="form-control input border-0 p-0" readonly type="text"></td>
-              <td name="task-status"><input class="form-control input border-0 p-0" readonly type="text"></td>
-              <td name="submitted-by"><input class="form-control input border-0 p-0" readonly type="text"></td>
-              <td name="actions" class="gap-3   d-flex justify-content-center align-items-center">
-                <button
-                  class="btn p-1 border-0 shadow-none bg-white"
-                  data-toggle="modal"
-                  data-target=".bd-example-modal-lg"
-                >
-                  <i class="view fa fa-eye md-p-1"></i>
-                </button>
-                <button class="edit btn p-0 border-0 shadow-none bg-white">
-                  <i class="edit fa fa-edit md-p-1"></i>
-                </button>
-				 <button class="save btn d-none p-0 border-0 shadow-none bg-white">
-                  <i class="save fa fa-save md-p-1"></i>
-                </button>
-                <button class="delete btn p-1 border-0 shadow-none bg-white">
-                  <i class="delete fa fa-trash md-p-1"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-   
+        id="list-view"
+        class="table table-sm md-table-lg table-bordered"
+      >
+        <thead>
+          <tr>
+            <th>Task link</th>
+            <th>Created</th>
+            <th>Assets Type</th>
+            <th>Task Lead</th>
+            <th>Task Status</th>
+            <th>Submitted by</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="tasklist-item">
+            <td name="task-link"><input class="form-control input border-0 p-0 " readonly type="text"></td>
+            <td name="created"><input class="form-control input border-0 p-0" readonly type="text"></td>
+            <td name="assets-type"><input class="form-control input border-0 p-0" readonly type="text"></td>
+            <td name="task-lead"><input class="form-control input border-0 p-0" readonly type="text"></td>
+            <td name="task-status"><input class="form-control input border-0 p-0" readonly type="text"></td>
+            <td name="submitted-by"><input class="form-control input border-0 p-0" readonly type="text"></td>
+            <td name="actions" class="gap-3   d-flex justify-content-center align-items-center">
+              <button
+                class="btn p-1 border-0 shadow-none bg-white"
+                data-toggle="modal"
+                data-target=".bd-example-modal-lg"
+              >
+                <i class="view fa fa-eye md-p-1"></i>
+              </button>
+              <button class="edit btn p-0 border-0 shadow-none bg-white">
+                <i class="edit fa fa-edit md-p-1"></i>
+              </button>
+              <button class="save btn d-none p-0 border-0 shadow-none bg-white">
+                <i class="save fa fa-save md-p-1"></i>
+              </button>
+              <button class="delete btn p-1 border-0 shadow-none bg-white">
+                <i class="delete fa fa-trash md-p-1"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+<!-- validation modal -->
+ 
+<div id="validation-modal" class="m-4 modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="d-flex justify-content-between">
+        <div class="p-4">Please Fill All The Fields</div>
+        <button type="button" class="close btn " data-dismiss="modal" aria-label="Close">
+          <span class="p-4"  aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  </div>
+</div>
+</div>
 <!-- Large modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -175,15 +200,31 @@
     </div>
   </div>
 </div>
-
-
-    <!--end conatiner-->
+   <!--end conatiner-->
       </div>
 
 
       <script>
 	  
-$("#table-list tbody tr:first").hide()
+$("#list-view tbody tr:first").hide()
+$("#success-alert").hide();
+
+// binding data to table 
+bindingQuickViewList("Manager","arjun")
+function bindingTableRow(){
+ var rowElement=$("#list-view tbody tr:first").clone().show();
+ $("[name=task-link] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik"
+ $("[name=created] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik" 
+ $("[name=assets-type] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik" 
+ $("[name=task-lead] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik" 
+ $("[name=submitted-by] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik" 
+ $("[name=task-status] input" ,rowElement).attr("disabled","disabled")[0].value="Mallik" 
+ $("[name=actions] i.edit" ,rowElement).attr("edit","1").click(editTaskListItem)
+ $("[name=actions] i.delete" ,rowElement).attr("delete","1").click(deleteTaskListItem)
+ $("[name=actions] i.save" ,rowElement).attr("save","1").click(saveTaskListItem)
+ $("#list-view tbody").append(rowElement)
+}
+
 function  bindingQuickViewList(title,name){
 var quickViewList=$("<div>").addClass("row mb-2").attr("id","quick-view-list")
     quickViewList.append(quickViewListItem())
@@ -193,28 +234,18 @@ var quickViewList=$("<div>").addClass("row mb-2").attr("id","quick-view-list")
    }
 }
 
-bindingQuickViewList("Manager","arjun")
-function bindingTableRow(){
- var rowElement=$("#table-list tbody tr:first").clone().show();
- $("[name=task-link] input" ,rowElement)[0].value="Mallik"
- $("[name=created] input" ,rowElement)[0].value="Mallik" 
- $("[name=assets-type] input" ,rowElement)[0].value="Mallik" 
- $("[name=task-lead] input" ,rowElement)[0].value="Mallik" 
- $("[name=task-status] input" ,rowElement)[0].value="Mallik" 
- $("[name=submitted-by] input" ,rowElement)[0].value="Mallik" 
- $("[name=actions] i.edit" ,rowElement).attr("edit","1").click(editTaskListItem)
- $("[name=actions] i.delete" ,rowElement).attr("delete","1").click(deleteTaskListItem)
-  $("[name=actions] i.save" ,rowElement).attr("save","1").click(saveTaskListItem)
- $("#table-list tbody").append(rowElement)
-}
 function editTaskListItem(e){
 console.log("edit function",$(e.target).attr("edit"))
 var rowele=$(e.target)[0].parentNode.parentNode.parentNode
 $("button.edit ",rowele).addClass("d-none")
 $("button.save ",rowele).removeClass("d-none")
 $("input",rowele).each(function(i,e){
- $(e).attr("readonly",false)
+ $(e).attr({"readonly":false,
+ "disabled":false})
+ $(e).removeClass("border-0")
  })
+ $("input",rowele)[0].focus()
+
 }
 function deleteTaskListItem(e){
 console.log("delete function",$(e.target).attr("delete"))
@@ -226,29 +257,44 @@ $("button.edit ",rowele).removeClass("d-none")
 $("button.save ",rowele).addClass("d-none")
 $("input",rowele).each(function(i,e){
 console.log($(e).val())
- $(e).attr("readonly",true)
+$(e).attr({"readonly":true,
+ "disabled":true})
+ $(e).addClass("border-0")
  })
 }
 
+
 $("#submit").click(function(e){
+  e.preventDefault()
 e.preventDefault()
 var userData=formValidation()
-if(!userData)alert("please fill the data")
+if(!userData)$('#validation-modal').modal('show'); 
 console.log(userData)
-})
+})      
 ///form- validation
 function formValidation(){
 var valid=true;
 var userInput={}
 $("form .form-control").each(function(i,e){
 var input=$(e)
-if(input.val()==""||input.val()==null)valid=false
+if(input.val()==""||input.val()==null){
+ input.on("input",validatingInput).addClass("is-invalid")  
+  valid=false
+}
 userInput[input.attr("id")]=input.val()
 })
 return valid?userInput:valid
 }
 bindingTableRow()
 bindingTableRow()
+bindingTableRow()
+bindingTableRow()
+
+
+ ///validating inputs if the field is empty 
+function validatingInput(e){
+ $(e.target).removeClass("is-invalid")
+}
       </script>
     </div>
   </body>
